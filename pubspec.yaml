@@ -6,6 +6,11 @@ version: 0.1.0
 environment:
   sdk: '>=2.19.6 <3.0.0'
 
+dependency_overrides:
+  # path: ^1.8.3
+  # meta: ^1.9.1
+  # js: ^0.6.7
+
 dependencies:
   flutter:
     sdk: flutter
@@ -21,7 +26,7 @@ dependencies:
   shimmer: ^2.0.0-nullsafety.0
   image_picker: ^0.8.4+8
   permission_handler: ^10.0.0
-
+  flutter_screenutil: ^5.7.0
 
 
 dev_dependencies:
@@ -29,6 +34,13 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^2.0.0
   yaml: ^3.1.2
+  # flutter_native_splash: ^2.3.2
+  # flutter_launcher_icons: ^0.13.1
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/images/app/
+    - assets/images/slider/

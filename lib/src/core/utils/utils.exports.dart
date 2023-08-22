@@ -4,5 +4,6 @@
 // genexp
 
 export 'app_constant.dart';
+export 'image_constant.dart';
 export 'network_info.dart';
 export 'utils.exports.dart';

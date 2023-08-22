@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kmp_ver2/kmp_ver2.dart';
 import 'package:provider/provider.dart';
 
@@ -22,25 +22,34 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localeSettings = context.read<LocaleSettingProvider>();
-    final themeModeSettings = context.read<ThemeModeSettingProvider>();
-
     return MultiProvider(
       providers: [
         ...InitializeApp.initProvider(),
       ],
-      child: MaterialApp(
-        title: AppConstants.appName,
-        debugShowCheckedModeBanner: false,
-        navigatorKey: AppConstants.navigatorKey,
-        themeMode: themeModeSettings.mode,
-        theme: lightTheme,
-        darkTheme: darkTheme,
-        locale: Locale(localeSettings.value),
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        routes: routes,
-      ),
+      builder: (context, child) {
+        final localeSettings = context.read<LocaleSettingProvider>();
+        final themeModeSettings = context.read<ThemeModeSettingProvider>();
+
+        return ScreenUtilInit(
+          designSize: const Size(375, 812),
+          minTextAdapt: true,
+          splitScreenMode: false,
+          builder: (BuildContext context, Widget? child) {
+            return MaterialApp(
+              title: AppConstants.appName,
+              debugShowCheckedModeBanner: false,
+              navigatorKey: AppConstants.navigatorKey,
+              themeMode: themeModeSettings.mode,
+              theme: lightTheme,
+              darkTheme: darkTheme,
+              locale: Locale(localeSettings.value),
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              routes: routes,
+            );
+          },
+        );
+      },
     );
   }
 }

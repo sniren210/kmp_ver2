@@ -3,5 +3,5 @@
 // run :
 // genexp
 
-export 'routes.dart';
-export 'routes.exports.dart';
+export 'onboarding.exports.dart';
+export 'onboarding_screen.dart';

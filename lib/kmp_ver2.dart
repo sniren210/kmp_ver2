@@ -3,6 +3,7 @@
 // run :
 // genexp
 
+export 'dependencies.dart';
 export 'initialize.dart';
 export 'kmp_ver2.dart';
 export 'main.dart';

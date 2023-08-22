@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:kmp_ver2/kmp_ver2.dart';
 
 final routes = {
-  '/': (BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text('Hello World!'),
-      ),
-    );
-  },
+  '/': (BuildContext context) => const SplashScreen(),
+  '/onboarding': (BuildContext context) => const OnboardingScreen(),
 };

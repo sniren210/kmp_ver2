@@ -5,3 +5,4 @@
 
 export 'repositories.exports.dart';
 export 'settings_provider/settings_provider.exports.dart';
+export 'splash_provider/splash_provider.exports.dart';
