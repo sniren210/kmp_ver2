@@ -19,7 +19,6 @@ class _SplashScreenState extends State<SplashScreen>
           Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
-            color: Theme.of(context).primaryColor,
           ),
           Center(
             child: Column(

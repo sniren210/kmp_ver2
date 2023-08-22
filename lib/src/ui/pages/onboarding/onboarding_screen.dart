@@ -13,6 +13,26 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   int _currentPage = 0;
 
+  final List<Map<String, dynamic>> _listOnboarding = [
+    {
+      'title': 'Daftar sekarang!',
+      'desc':
+          'Kemana kamu pergi hari ini? kami akan siap berkendara dimana saja dan kapan saja',
+      'image': ImageConstant.slider1
+    },
+    {
+      'title': 'Dapat dilacak',
+      'desc': 'Lacak lokasi dan driver paket Anda, secara real-time.',
+      'image': ImageConstant.slider2
+    },
+    {
+      'title': 'Pengiriman cepat',
+      'desc':
+          'Anda dapat tetap produktif saat kami mengambil dan mengantar paket Anda, semuanya dalam hitungan jam!',
+      'image': ImageConstant.slider3
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,11 +42,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox
-            (
-        height: context.appSize.height * 0.8,
+            SizedBox(
+              height: context.appSize.height * 0.8,
               child: PageView.builder(
-                itemCount: 3,
+                itemCount: _listOnboarding.length,
                 onPageChanged: (value) {
                   setState(() {
                     _currentPage = value;
@@ -44,7 +63,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         height: 32.h,
                       ),
                       Image.asset(
-                        'assets/images/slider/slide_one.png',
+                        _listOnboarding[index]['image'],
                         height: 400.h,
                       ),
                       Padding(
@@ -53,14 +72,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Daftar sekarang',
+                              _listOnboarding[index]['title'],
                               style: context.theme.textTheme.bodyLarge,
                             ),
                             SizedBox(
                               height: 8.h,
                             ),
                             Text(
-                              'Kemana kamu pergi hari ini? kami akan siap berkendara dimana saja dan kapan saja',
+                              _listOnboarding[index]['desc'],
                               style: context.theme.textTheme.labelLarge,
                             ),
                           ],
@@ -84,7 +103,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 18.0.w),
               child: FilledButton(
-                onPressed: () {},
+                onPressed: () => LoginScreen.pushScreen(context),
                 child: Text('Get Started'),
               ),
             )
@@ -97,7 +116,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget _buildDotIndicator() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
-      children: List<Widget>.generate(3, (int index) {
+      children: List<Widget>.generate(_listOnboarding.length, (int index) {
         return AnimatedContainer(
           duration: Duration(milliseconds: 300),
           margin: EdgeInsets.symmetric(horizontal: 4.0.w),
