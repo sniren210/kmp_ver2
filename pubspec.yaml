@@ -7,9 +7,9 @@ environment:
   sdk: '>=2.19.6 <3.0.0'
 
 dependency_overrides:
-  # path: ^1.8.3
-  # meta: ^1.9.1
-  # js: ^0.6.7
+  path: ^1.8.3
+  meta: ^1.9.1
+  js: ^0.6.7
 
 dependencies:
   flutter:
@@ -29,9 +29,9 @@ dependencies:
   flutter_screenutil: ^5.7.0
   phone_number: ^1.0.0
   country_code_picker: ^3.0.0
-  pin_code_fields: ^8.0.1
   flutter_camera_overlay: ^0.1.1
   camera: ^0.9.8+1
+  pinput: ^3.0.1
 
 
 dev_dependencies:
@@ -39,8 +39,17 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^2.0.0
   yaml: ^3.1.2
-  # flutter_native_splash: ^2.3.2
-  # flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.2
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  ios: true
+  android: true
+  image_path: "assets/images/app/logo.png"
+
+flutter_native_splash:
+  color: "#4ec47c"
+  image: assets/images/app/logo.png
 
 flutter:
   uses-material-design: true

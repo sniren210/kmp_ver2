@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kmp_ver2/kmp_ver2.dart';
 
 ThemeData get darkTheme {
@@ -32,7 +33,7 @@ ThemeData get darkTheme {
       clipBehavior: Clip.antiAlias,
     ),
     inputDecorationTheme: const InputDecorationTheme(
-      contentPadding: EdgeInsets.symmetric(vertical: 8,horizontal: 10),
+      contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
@@ -84,6 +85,20 @@ ThemeData get darkTheme {
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: ColorSchemeKmp.colorPrimary,
+      selectedItemColor: ColorSchemeKmp.colorPrimary,
+      selectedIconTheme: IconThemeData(
+        color: ColorSchemeKmp.colorPrimary,
+      ),
+      unselectedLabelStyle: TextStyle(color: Colors.white),
+      unselectedItemColor: Colors.white,
+      unselectedIconTheme: IconThemeData(
+        color: Colors.white,
+      ),
+    ),
+    appBarTheme: const AppBarTheme(
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarColor: ColorSchemeKmp.colorPrimary,
+      ),
     ),
   );
 }

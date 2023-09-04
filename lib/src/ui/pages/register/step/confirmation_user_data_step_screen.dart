@@ -23,133 +23,166 @@ class _ConfirmationUserDataStepScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text(
+          'Konfirmasi data kamu',
+          style: context.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+      ),
       body: Form(
         key: _formKey,
-        child: Column(
-          children: [
-            TextFormField(
-              controller: _emailController,
-              keyboardType: TextInputType.phone,
-              decoration: InputDecoration(
-                hintText: 'Masukan email anda',
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24.w),
+          child: Column(
+            children: [
+              SizedBox(
+                height: context.dimensions.marginSizeDefault,
               ),
-            ),
-            TextFormField(
-              controller: _passwordController,
-              obscureText: _obscurePassword,
-              decoration: InputDecoration(
-                hintText: 'Password',
-                prefixIcon: Container(
-                  width: 50.w,
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.only(right: 10.w, left: 4.w),
-                  child: Icon(Icons.lock, size: 18.sp),
+              TextFormField(
+                controller: _emailController,
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  hintText: 'Masukan email anda',
                 ),
-                suffixIcon: GestureDetector(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 4.w, right: 10.w),
-                    child: Icon(
-                        _obscurePassword
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        size: 18.sp),
+              ),
+              SizedBox(
+                height: context.dimensions.marginSizeDefault,
+              ),
+              TextFormField(
+                controller: _passwordController,
+                obscureText: _obscurePassword,
+                decoration: InputDecoration(
+                  hintText: 'Password',
+                  prefixIcon: Container(
+                    width: 50.w,
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.only(right: 10.w, left: 4.w),
+                    child: Icon(Icons.lock, size: 18.sp),
                   ),
-                  onTap: () {
-                    setState(() {
-                      _obscurePassword = !_obscurePassword;
-                    });
-                  },
-                ),
-              ),
-            ),
-            TextFormField(
-              controller: _confirmPasswordController,
-              obscureText: _obscurePassword,
-              decoration: InputDecoration(
-                hintText: 'Password',
-                prefixIcon: Container(
-                  width: 50.w,
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.only(right: 10.w, left: 4.w),
-                  child: Icon(Icons.lock, size: 18.sp),
-                ),
-                suffixIcon: GestureDetector(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 4.w, right: 10.w),
-                    child: Icon(
-                        _obscurePassword
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        size: 18.sp),
-                  ),
-                  onTap: () {
-                    setState(() {
-                      _obscurePassword = !_obscurePassword;
-                    });
-                  },
-                ),
-              ),
-            ),
-            TextFormField(
-              controller: _referalController,
-              keyboardType: TextInputType.phone,
-              decoration: InputDecoration(
-                hintText: 'Masukan email anda',
-              ),
-            ),
-            Row(
-              children: [
-                Checkbox(
-                  value: true,
-                  onChanged: (bool? value) {},
-                ),
-                Expanded(
-                  child: RichText(
-                    text: TextSpan(
-                        text: 'saya telah membaca dan menyetujui',
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                        children: <TextSpan>[
-                          TextSpan(
-                              text: ' Kebijakan privasi ',
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                              ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {}),
-                          TextSpan(
-                              text: ' dan ',
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  // navigate to desired screen
-                                }),
-                          TextSpan(
-                              text: ' Peraturan anggota ',
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                              ),
-                              recognizer: TapGestureRecognizer()..onTap = () {})
-                        ]),
+                  suffixIcon: GestureDetector(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 4.w, right: 10.w),
+                      child: Icon(
+                          _obscurePassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          size: 18.sp),
+                    ),
+                    onTap: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
                   ),
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 32,
-            ),
-            FilledButton(
-              onPressed: () {},
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 6.0.h),
-                child: Text(
-                  'Mendaftar',
-                  style: context.textTheme.headlineMedium
-                      ?.copyWith(color: Colors.white, letterSpacing: 3),
+              ),
+              SizedBox(
+                height: context.dimensions.marginSizeDefault,
+              ),
+              TextFormField(
+                controller: _confirmPasswordController,
+                obscureText: _obscurePassword,
+                decoration: InputDecoration(
+                  hintText: 'Password',
+                  prefixIcon: Container(
+                    width: 50.w,
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.only(right: 10.w, left: 4.w),
+                    child: Icon(Icons.lock, size: 18.sp),
+                  ),
+                  suffixIcon: GestureDetector(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 4.w, right: 10.w),
+                      child: Icon(
+                          _obscurePassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          size: 18.sp),
+                    ),
+                    onTap: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
+                  ),
                 ),
               ),
-            ),
-          ],
+              SizedBox(
+                height: context.dimensions.marginSizeDefault,
+              ),
+              TextFormField(
+                controller: _referalController,
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  hintText: 'Masukan email anda',
+                ),
+              ),
+              SizedBox(
+                height: context.dimensions.marginSizeLarge,
+              ),
+              Row(
+                children: [
+                  Checkbox(
+                    value: true,
+                    onChanged: (bool? value) {},
+                  ),
+                  Expanded(
+                    child: RichText(
+                      text: TextSpan(
+                          text: 'saya telah membaca dan menyetujui',
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: ' Kebijakan privasi ',
+                                style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {}),
+                            TextSpan(
+                                text: ' dan ',
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    // navigate to desired screen
+                                  }),
+                            TextSpan(
+                                text: ' Peraturan anggota ',
+                                style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {})
+                          ]),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: context.dimensions.marginSizeLarge,
+              ),
+              FilledButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PinSetUserStepScreen(),
+                      ));
+                },
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 6.0.h),
+                  child: Text(
+                    'Mendaftar',
+                    style: context.textTheme.headlineSmall
+                        ?.copyWith(color: Colors.white, letterSpacing: 3),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

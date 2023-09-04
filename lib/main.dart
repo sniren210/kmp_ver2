@@ -5,6 +5,7 @@ import 'package:kmp_ver2/kmp_ver2.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
+  
   WidgetsFlutterBinding.ensureInitialized();
 
   await InitializeApp.init();
@@ -13,6 +14,10 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: ColorSchemeKmp.colorPrimary, 
+  ));
 
   runApp(const MainApp());
 }

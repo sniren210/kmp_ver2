@@ -20,16 +20,10 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(5.0),
-        child: AppBar(
-          backgroundColor: ColorSchemeKmp.colorPrimary,
-        ),
-      ),
       body: Column(
         children: [
           SizedBox(
-            height: 350.h,
+            height: 360.h,
             child: Stack(
               children: [
                 Container(
@@ -42,7 +36,11 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 ),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: BackButton(),
+                  child: SafeArea(
+                    child: BackButton(
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
@@ -52,7 +50,16 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        TextFormField(),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            labelText: "Masukan email anda...",
+                            filled: true,
+                            fillColor: Colors.grey.shade200,
+                          ),
+                        ),
+                        SizedBox(
+                          height: context.dimensions.marginSizeDefault,
+                        ),
                         FilledButton(
                           onPressed: () => {},
                           child: Text('Confirm'),

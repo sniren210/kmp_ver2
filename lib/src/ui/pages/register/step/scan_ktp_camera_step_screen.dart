@@ -2,16 +2,17 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_camera_overlay/flutter_camera_overlay.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter_camera_overlay/model.dart';
 import 'package:flutter_camera_overlay/overlay_shape.dart';
+import 'package:kmp_ver2/kmp_ver2.dart';
 
 class ScanKTPCameraStepScreen extends StatefulWidget {
   const ScanKTPCameraStepScreen({super.key});
 
   @override
-  State<ScanKTPCameraStepScreen> createState() => _ScanKTPCameraStepScreenState();
+  State<ScanKTPCameraStepScreen> createState() =>
+      _ScanKTPCameraStepScreenState();
 }
 
 class _ScanKTPCameraStepScreenState extends State<ScanKTPCameraStepScreen> {
@@ -71,6 +72,14 @@ class _ScanKTPCameraStepScreenState extends State<ScanKTPCameraStepScreen> {
                                               strokeWidth: 2.0)))
                                   : OutlinedButton(
                                       onPressed: () async {
+                                        controller.pausePreview();
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ConfirmationKTPStepScreen(),
+                                            ));
+
                                         _satset(() {
                                           isLoading = true;
                                         });
@@ -175,31 +184,13 @@ class _CameraOverlayTogoState extends State<CameraOverlayTogo> {
             ),
             Padding(
               padding: const EdgeInsets.only(right: 20.0, left: 20.0, top: 40),
-              child: InkWell(
-                onTap: () async {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => const RegisterIdValidationPage(
-                  //             useCamera: false,
-                  //           )),
-                  // );
-                },
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 70),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(24),
-                      color: const Color(0xFF85014e)),
-                  child: const Text(
-                    'Selanjutnya',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 15),
-                  ),
+              child: FilledButton(
+                onPressed: () {},
+                child: Text(
+                  'Selanjutnya',
+                  textAlign: TextAlign.center,
+                  style: context.textTheme.headlineMedium
+                      ?.copyWith(color: Colors.white, letterSpacing: 3),
                 ),
               ),
             )
@@ -258,6 +249,10 @@ class _CameraOverlayTogoState extends State<CameraOverlayTogo> {
                       for (int i = 10; i > 0; i--) {
                         await HapticFeedback.vibrate();
                       }
+
+                      controller.pausePreview();
+                      // controller.pauseVideoRecording();
+                      // controller.dispose();
 
                       XFile file = await controller.takePicture();
                       widget.onCapture(file, controller);

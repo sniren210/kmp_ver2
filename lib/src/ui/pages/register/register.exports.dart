@@ -5,3 +5,4 @@
 
 export 'register.exports.dart';
 export 'register_screen.dart';
+export 'step/step.exports.dart';
