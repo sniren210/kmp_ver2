@@ -5,3 +5,5 @@
 
 export 'auth_data_source.dart';
 export 'datasource.exports.dart';
+export 'member_type_data_source.dart';
+export 'onboarding_data_source.dart';

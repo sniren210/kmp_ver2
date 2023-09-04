@@ -83,15 +83,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 FilledButton(
                   onPressed: () async {
+                  
                     if (_formKey.currentState?.validate() ?? false) {
                       final res = await repo.setPhoneNumber(
                           phoneNumber: _phoneNumberController.text);
 
-                      if (res.data.message == 'Send otp successfully!' ) {
+                      if (res.data.message == 'Send otp successfully!') {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => OtpCodeStepScreen(phoneNumber: _phoneNumberController.text),
+                              builder: (context) => OtpCodeStepScreen(
+                                  phoneNumber: _phoneNumberController.text),
                             ));
                       } else {
                         SnackBarUtils.show(context,

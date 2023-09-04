@@ -10,24 +10,34 @@ class RegisterProvider extends ChangeNotifier with LoadingChangeNotifierMixin {
   RegisterRequest registerRequest = RegisterRequest();
 
   Future<GetOtpModel> setPhoneNumber({required String phoneNumber}) async {
-    setLoading(true);
-    final res = await _authDataSource.getOtp(phoneNumber: phoneNumber);
-    setLoading(false);
+    try {
+      setLoading(true);
+      final res = await _authDataSource.getOtp(phoneNumber: phoneNumber);
+      setLoading(false);
 
-    return res;
+      return res;
+    } catch (e) {
+      setLoading(false);
+      throw Exception();
+    }
   }
 
   Future<GetOtpModel> verifyPhoneNumber(
       {required String phoneNumber, required String code}) async {
-    setLoading(true);
-    final res =
-        await _authDataSource.verifyOtp(phoneNumber: phoneNumber, code: code);
-    setLoading(false);
+    try {
+      setLoading(true);
+      final res =
+          await _authDataSource.verifyOtp(phoneNumber: phoneNumber, code: code);
+      setLoading(false);
 
-    registerRequest = registerRequest.copyWith(phone: phoneNumber);
-    notifyListeners();
+      registerRequest = registerRequest.copyWith(phone: phoneNumber);
+      notifyListeners();
 
-    return res;
+      return res;
+    } catch (e) {
+      setLoading(false);
+      throw Exception();
+    }
   }
 
   void setDataUser({required String email, required String password}) {
@@ -44,10 +54,20 @@ class RegisterProvider extends ChangeNotifier with LoadingChangeNotifierMixin {
     notifyListeners();
   }
 
-  void setmemberType({required String memberType}) {
-    registerRequest = registerRequest.copyWith(memberTypeId: memberType);
+  Future<SetMemberModel> setmemberType({required String memberType}) async {
+    try {
+      final res = await _authDataSource.setMember(memberTypeId: memberType);
 
-    notifyListeners();
+      if (res.success) {
+        registerRequest = registerRequest.copyWith(memberTypeId: memberType);
+        notifyListeners();
+      }
+
+      return res;
+    } catch (e) {
+      setLoading(false);
+      throw Exception();
+    }
   }
 
   void setDataKtp({
@@ -91,21 +111,33 @@ class RegisterProvider extends ChangeNotifier with LoadingChangeNotifierMixin {
   }
 
   Future<CheckKtpModel> uploadKtp({required File image}) async {
-    setLoading(true);
-    final res = await _authDataSource.checkKtp(image: image);
-    setLoading(false);
+    try {
+      setLoading(true);
+      final res = await _authDataSource.checkKtp(image: image);
+      setLoading(false);
 
-    return res;
+      return res;
+    } catch (e) {
+      setLoading(false);
+      throw Exception();
+    }
   }
 
-  void register() async {
-    setLoading(true);
-    final res = await _authDataSource.register(request: registerRequest);
-    setLoading(false);
+  Future<bool> register() async {
+    try {
+      setLoading(true);
+      final res = await _authDataSource.register(request: registerRequest);
+      setLoading(false);
 
-    if (res.success) {
-      _sharedPreferences.setString(
-          AppConstants.prefsConstrants.token, res.data.token);
+      if (res.success) {
+        _sharedPreferences.setString(
+            AppConstants.prefsConstant.token, res.data.token);
+      }
+
+      return res.success;
+    } catch (e) {
+      setLoading(false);
+      throw Exception();
     }
   }
 }

@@ -20,7 +20,7 @@ class DioClient {
     required this.sharedPreferences,
   }) {
     token =
-        sharedPreferences.getString(AppConstants.prefsConstrants.token) ?? '';
+        sharedPreferences.getString(AppConstants.prefsConstant.token) ?? '';
     dio
       ..options.baseUrl = baseUrl
       ..options.connectTimeout = 30000

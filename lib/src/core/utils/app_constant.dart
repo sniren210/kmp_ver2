@@ -8,7 +8,7 @@ class AppConstants {
   static const String baseUrl = '$hostUrl/api/v1';
 
   // Constant Share prefs
-  static PrefsConstants prefsConstrants = PrefsConstants();
+  static PrefsConstants prefsConstant = PrefsConstants();
 
   static ApiConstant apiConstant = ApiConstant();
 
@@ -29,4 +29,7 @@ class ApiConstant {
   String login = '/auth/login';
 
   String setMember = '/customer/set-member';
+
+  String onboarding = '/intro';
+  String memberList = '/customer/member_type';
 }

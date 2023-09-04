@@ -28,8 +28,8 @@ ThemeData get darkTheme {
         borderSide: BorderSide(color: ColorSchemeKmp.colorPrimary, width: 2),
       ),
     ),
-    cardTheme: const CardTheme(
-      color: Color(0xFF141414),
+    cardTheme:  CardTheme(
+      color: Colors.grey.shade200,
       clipBehavior: Clip.antiAlias,
     ),
     inputDecorationTheme: const InputDecorationTheme(

@@ -69,11 +69,14 @@ class AuthDataSource {
   Future<CheckKtpModel> checkKtp({required File image}) async {
     String fileName = image.path.split('/').last;
 
+     FormData formData = FormData.fromMap({
+        "image":
+            await MultipartFile.fromFile(image.path, filename:fileName),
+    });
+
     final response = await dioClient.post(
       AppConstants.apiConstant.checkKtp,
-      data: {
-        'image': await MultipartFile.fromFile(image.path, filename: fileName),
-      },
+      data: formData,
       options: Options(contentType: 'multipart/form-data'),
     );
 

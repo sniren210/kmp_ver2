@@ -26,8 +26,8 @@ ThemeData get lightTheme {
         borderSide: BorderSide(color: ColorSchemeKmp.colorPrimary, width: 2),
       ),
     ),
-    cardTheme: const CardTheme(
-      color: Color.fromARGB(255, 233, 232, 232),
+    cardTheme:  CardTheme(
+      color: Colors.grey.shade200,
       elevation: 10,
       clipBehavior: Clip.antiAlias,
     ),

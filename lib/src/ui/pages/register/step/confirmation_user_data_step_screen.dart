@@ -17,6 +17,7 @@ class _ConfirmationUserDataStepScreenState
   final _confirmPasswordController = TextEditingController();
   final _referalController = TextEditingController();
   bool _obscurePassword = true;
+  bool termOfService = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -46,7 +47,6 @@ class _ConfirmationUserDataStepScreenState
               TextFormField(
                 controller: _emailController,
                 validator: Validator.email,
-                keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
                   hintText: 'Masukan email anda',
                 ),
@@ -139,8 +139,12 @@ class _ConfirmationUserDataStepScreenState
               Row(
                 children: [
                   Checkbox(
-                    value: true,
-                    onChanged: (bool? value) {},
+                    value: termOfService,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        termOfService = !termOfService;
+                      });
+                    },
                   ),
                   Expanded(
                     child: RichText(
@@ -180,7 +184,7 @@ class _ConfirmationUserDataStepScreenState
               ),
               FilledButton(
                 onPressed: () {
-                  if (_formKey.currentState?.validate() ?? false) {
+                  if ((_formKey.currentState?.validate() ?? false) && termOfService) {
                     repo.setDataUser(
                         email: _emailController.text,
                         password: _passwordController.text);

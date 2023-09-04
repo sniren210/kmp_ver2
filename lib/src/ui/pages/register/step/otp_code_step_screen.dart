@@ -66,18 +66,16 @@ class _OtpCodeStepScreenState extends State<OtpCodeStepScreen> {
               SizedBox(
                 height: context.dimensions.marginSizeDefault,
               ),
-              Text('083452342342'),
+              Text(widget.phoneNumber),
               SizedBox(
                 height: context.dimensions.marginSizeLarge,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Pinput(
-                    controller: _otpController,
-                    length: 6,
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                child: Pinput(
+                  controller: _otpController,
+                  length: 6,
+                ),
               ),
               SizedBox(
                 height: context.dimensions.marginSizeLarge,

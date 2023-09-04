@@ -261,10 +261,6 @@ class _CameraOverlayTogoState extends State<CameraOverlayTogo> {
                         await HapticFeedback.vibrate();
                       }
 
-                      controller.pausePreview();
-                      // controller.pauseVideoRecording();
-                      // controller.dispose();
-
                       XFile file = await controller.takePicture();
                       widget.onCapture(file, controller);
                     },

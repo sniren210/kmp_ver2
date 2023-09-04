@@ -14,7 +14,7 @@ class LoginProvider extends ChangeNotifier with LoadingChangeNotifierMixin {
 
     if (res.success) {
       _sharedPreferences.setString(
-          AppConstants.prefsConstrants.token, res.data.token);
+          AppConstants.prefsConstant.token, res.data.token);
     }
 
     return res;

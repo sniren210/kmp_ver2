@@ -44,7 +44,7 @@ class MainApp extends StatelessWidget {
               title: AppConstants.appName,
               debugShowCheckedModeBanner: false,
               navigatorKey: AppConstants.navigatorKey,
-              themeMode: themeModeSettings.mode,
+              themeMode: ThemeMode.light,
               theme: lightTheme,
               darkTheme: darkTheme,
               locale: Locale(localeSettings.value),

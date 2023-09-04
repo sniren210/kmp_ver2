@@ -177,7 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Align(
                                 alignment: Alignment.center,
                                 child: Container(
-                                  color: Colors.white,
+                                  color: context.theme.colorScheme.background,
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 12.w),
                                   child: Text(

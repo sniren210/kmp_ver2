@@ -22,13 +22,13 @@ class ThemeModeSettingProvider with ChangeNotifier {
   }
 
   ThemeMode get mode {
-    final value = sharedPreferences.getInt(AppConstants.prefsConstrants.themeModeSetting);
+    final value = sharedPreferences.getInt(AppConstants.prefsConstant.themeModeSetting);
 
     return ThemeMode.values[value ?? 0];
   }
 
   Future<void> setMode(ThemeMode mode) async {
-    await sharedPreferences.setInt(AppConstants.prefsConstrants.themeModeSetting, mode.index);
+    await sharedPreferences.setInt(AppConstants.prefsConstant.themeModeSetting, mode.index);
     notifyListeners();
   }
 }

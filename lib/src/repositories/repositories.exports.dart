@@ -4,6 +4,8 @@
 // genexp
 
 export 'login_provider/login_provider.exports.dart';
+export 'member_type/member_type.exports.dart';
+export 'onboarding/onboarding.exports.dart';
 export 'register_provider/register_provider.exports.dart';
 export 'repositories.exports.dart';
 export 'settings_provider/settings_provider.exports.dart';

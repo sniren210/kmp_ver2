@@ -37,12 +37,14 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Future<void> initializeInSplash() async {
+
     final SharedPreferences sharedPreferences = sl<SharedPreferences>();
 
     final userToken =
-        sharedPreferences.getString(AppConstants.prefsConstrants.token);
+        sharedPreferences.getString(AppConstants.prefsConstant.token);
 
     await Future.delayed(const Duration(seconds: 2));
+    // await context.read<OnboardingProvider>().getData();
 
     if (userToken?.isNotEmpty ?? false) {
       Navigator.push(

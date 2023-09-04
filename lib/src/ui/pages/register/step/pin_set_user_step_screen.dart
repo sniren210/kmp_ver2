@@ -12,76 +12,74 @@ class PinSetUserStepScreen extends StatefulWidget {
 class _PinSetUserStepScreenState extends State<PinSetUserStepScreen> {
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: context.dimensions.marginSizeLarge,
-            ),
-            Image.asset(
-              ImageConstant.logo,
-              width: 150.w,
-            ),
-            SizedBox(
-              height: context.dimensions.marginSizeDefault,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50),
-              child: Center(
-                  child: Text(
-                "Buat PIN AKUN MU",
-                style: context.textTheme.headlineMedium
-                    ?.copyWith(fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              )),
-            ),
-            SizedBox(
-              height: context.dimensions.marginSizeDefault,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30.0),
-              child: Center(
-                  child: Text(
-                "Pin digunakan untuk setiap transaksi yang terjadi di aplikasi",
-                textAlign: TextAlign.center,
-              )),
-            ),
-            SizedBox(
-              height: context.dimensions.marginSizeLarge,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Pinput(
-                    length: 6,
-                  ),
-                ],
+        child: SafeArea(
+          child: Column(
+            children: [
+              SizedBox(
+                height: context.dimensions.marginSizeLarge,
               ),
-            ),
-            SizedBox(
-              height: context.dimensions.marginSizeLarge,
-            ),
-            FilledButton(
-              onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SelectMemberStepScreen(),
-                    ));
-              },
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 6.0.h),
-                child: Text(
-                  'Simpan pin',
-                  style: context.textTheme.headlineSmall
-                      ?.copyWith(color: Colors.white, letterSpacing: 3),
+              Image.asset(
+                ImageConstant.logo,
+                width: 150.w,
+              ),
+              SizedBox(
+                height: context.dimensions.marginSizeDefault,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 50),
+                child: Center(
+                    child: Text(
+                  "Buat PIN AKUN MU",
+                  style: context.textTheme.headlineMedium
+                      ?.copyWith(fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                )),
+              ),
+              SizedBox(
+                height: context.dimensions.marginSizeDefault,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                child: Center(
+                    child: Text(
+                  "Pin digunakan untuk setiap transaksi yang terjadi di aplikasi",
+                  textAlign: TextAlign.center,
+                )),
+              ),
+              SizedBox(
+                height: context.dimensions.marginSizeLarge,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 30,horizontal: 14),
+                child: Pinput(
+                  length: 6,
                 ),
               ),
-            ),
-          ],
+              SizedBox(
+                height: context.dimensions.marginSizeLarge,
+              ),
+              FilledButton(
+                onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SelectMemberStepScreen(),
+                      ));
+                },
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 6.0.h),
+                  child: Text(
+                    'Simpan pin',
+                    style: context.textTheme.headlineSmall
+                        ?.copyWith(color: Colors.white, letterSpacing: 3),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

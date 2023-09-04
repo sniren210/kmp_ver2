@@ -2,6 +2,8 @@ import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kmp_ver2/kmp_ver2.dart';
+import 'package:kmp_ver2/src/repositories/member_type/member_type_provider.dart';
+import 'package:kmp_ver2/src/repositories/onboarding/onboarding_provider.dart';
 import 'package:nested/nested.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,6 +23,8 @@ class InitializeApp {
     
     
     sl.registerLazySingleton(() => AuthDataSource(dioClient: sl<DioClient>()));
+    sl.registerLazySingleton(() => MemberTypeDataSource(dioClient: sl<DioClient>()));
+    sl.registerLazySingleton(() => OnboardingDataSource(dioClient: sl<DioClient>()));
 
     // Provider register
     sl.registerLazySingleton(() => ThemeModeSettingProvider(sharedPreferences: sl<SharedPreferences>() ));
@@ -29,6 +33,8 @@ class InitializeApp {
 
     sl.registerLazySingleton(() => RegisterProvider());   
     sl.registerLazySingleton(() => LoginProvider());   
+    sl.registerLazySingleton(() => MemberTypeProvider());   
+    sl.registerLazySingleton(() => OnboardingProvider());   
   }
 
   static List<SingleChildWidget> initProvider() {
@@ -38,6 +44,8 @@ class InitializeApp {
       ChangeNotifierProvider(create: (context) => sl<SplashProvider>()),
       ChangeNotifierProvider(create: (context) => sl<RegisterProvider>()),
       ChangeNotifierProvider(create: (context) => sl<LoginProvider>()),
+      ChangeNotifierProvider(create: (context) => sl<MemberTypeProvider>()),
+      ChangeNotifierProvider(create: (context) => sl<OnboardingProvider>()),
 
     ];
   }
