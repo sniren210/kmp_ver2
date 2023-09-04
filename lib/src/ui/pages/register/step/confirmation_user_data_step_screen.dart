@@ -22,12 +22,15 @@ class _ConfirmationUserDataStepScreenState
 
   @override
   Widget build(BuildContext context) {
+    final repo = context.watch<RegisterProvider>();
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
           'Konfirmasi data kamu',
-          style: context.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+          style: context.textTheme.titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
@@ -42,6 +45,7 @@ class _ConfirmationUserDataStepScreenState
               ),
               TextFormField(
                 controller: _emailController,
+                validator: Validator.email,
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
                   hintText: 'Masukan email anda',
@@ -52,6 +56,9 @@ class _ConfirmationUserDataStepScreenState
               ),
               TextFormField(
                 controller: _passwordController,
+                validator: (value) {
+                  return Validator.password(value);
+                },
                 obscureText: _obscurePassword,
                 decoration: InputDecoration(
                   hintText: 'Password',
@@ -84,8 +91,15 @@ class _ConfirmationUserDataStepScreenState
               TextFormField(
                 controller: _confirmPasswordController,
                 obscureText: _obscurePassword,
+                validator: (value) {
+                  if (value != _passwordController.text) {
+                    return 'Passwords do not match.';
+                  }
+
+                  return Validator.password(value);
+                },
                 decoration: InputDecoration(
-                  hintText: 'Password',
+                  hintText: 'Password Confirmation',
                   prefixIcon: Container(
                     width: 50.w,
                     alignment: Alignment.center,
@@ -116,7 +130,7 @@ class _ConfirmationUserDataStepScreenState
                 controller: _referalController,
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
-                  hintText: 'Masukan email anda',
+                  hintText: 'Masukan referral anda',
                 ),
               ),
               SizedBox(
@@ -166,11 +180,16 @@ class _ConfirmationUserDataStepScreenState
               ),
               FilledButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PinSetUserStepScreen(),
-                      ));
+                  if (_formKey.currentState?.validate() ?? false) {
+                    repo.setDataUser(
+                        email: _emailController.text,
+                        password: _passwordController.text);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PinSetUserStepScreen(),
+                        ));
+                  }
                 },
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 6.0.h),

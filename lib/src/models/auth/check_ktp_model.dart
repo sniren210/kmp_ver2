@@ -9,21 +9,56 @@ CheckKtpModel checkKtpModelFromJson(String str) => CheckKtpModel.fromJson(json.d
 String checkKtpModelToJson(CheckKtpModel data) => json.encode(data.toJson());
 
 class CheckKtpModel {
-    CheckKtpModelMessage message;
+    int status;
+    bool success;
+    CheckKtpData data;
 
     CheckKtpModel({
-        required this.message,
+        required this.status,
+        required this.success,
+        required this.data,
     });
 
     CheckKtpModel copyWith({
-        CheckKtpModelMessage? message,
+        int? status,
+        bool? success,
+        CheckKtpData? data,
     }) => 
         CheckKtpModel(
-            message: message ?? this.message,
+            status: status ?? this.status,
+            success: success ?? this.success,
+            data: data ?? this.data,
         );
 
     factory CheckKtpModel.fromJson(Map<String, dynamic> json) => CheckKtpModel(
-        message: CheckKtpModelMessage.fromJson(json["message"]),
+        status: json["status"],
+        success: json["success"],
+        data: CheckKtpData.fromJson(json["data"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "status": status,
+        "success": success,
+        "data": data.toJson(),
+    };
+}
+
+class CheckKtpData {
+    DataMessage message;
+
+    CheckKtpData({
+        required this.message,
+    });
+
+    CheckKtpData copyWith({
+        DataMessage? message,
+    }) => 
+        CheckKtpData(
+            message: message ?? this.message,
+        );
+
+    factory CheckKtpData.fromJson(Map<String, dynamic> json) => CheckKtpData(
+        message: DataMessage.fromJson(json["message"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -31,25 +66,25 @@ class CheckKtpModel {
     };
 }
 
-class CheckKtpModelMessage {
+class DataMessage {
     String status;
     MessageMessage message;
 
-    CheckKtpModelMessage({
+    DataMessage({
         required this.status,
         required this.message,
     });
 
-    CheckKtpModelMessage copyWith({
+    DataMessage copyWith({
         String? status,
         MessageMessage? message,
     }) => 
-        CheckKtpModelMessage(
+        DataMessage(
             status: status ?? this.status,
             message: message ?? this.message,
         );
 
-    factory CheckKtpModelMessage.fromJson(Map<String, dynamic> json) => CheckKtpModelMessage(
+    factory DataMessage.fromJson(Map<String, dynamic> json) => DataMessage(
         status: json["status"],
         message: MessageMessage.fromJson(json["message"]),
     );

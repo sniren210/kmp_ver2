@@ -1,11 +1,14 @@
 import 'dart:async';
 
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:kmp_ver2/kmp_ver2.dart';
 import 'package:pinput/pinput.dart';
 
 class OtpCodeStepScreen extends StatefulWidget {
-  const OtpCodeStepScreen({super.key});
+  final String phoneNumber;
+
+  const OtpCodeStepScreen({super.key, required this.phoneNumber});
 
   @override
   State<OtpCodeStepScreen> createState() => _OtpCodeStepScreenState();
@@ -19,7 +22,6 @@ class _OtpCodeStepScreenState extends State<OtpCodeStepScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     timer = Timer.periodic(Duration(seconds: 1), (time) {
@@ -39,6 +41,8 @@ class _OtpCodeStepScreenState extends State<OtpCodeStepScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final repo = context.watch<RegisterProvider>();
+
     return Scaffold(
       appBar: AppBar(),
       body: Column(
@@ -79,13 +83,7 @@ class _OtpCodeStepScreenState extends State<OtpCodeStepScreen> {
                 height: context.dimensions.marginSizeLarge,
               ),
               GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ConfirmationKTPStepScreen(),
-                      ));
-                },
+                onTap: () {},
                 child: Text('Saya tidak menerima Kode '),
               ),
               SizedBox(
@@ -115,12 +113,27 @@ class _OtpCodeStepScreenState extends State<OtpCodeStepScreen> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: FilledButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ScanKTPCameraStepScreen(),
-                    ));
+              onPressed: () async {
+                // print(widget.phoneNumber);
+                // return;
+                if (_otpController.text.length == 6) {
+                  final res = await repo.verifyPhoneNumber(
+                      phoneNumber: widget.phoneNumber,
+                      code: _otpController.text);
+
+                  if (res.success) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ScanKTPCameraStepScreen(),
+                        ));
+                  } else {
+                    SnackBarUtils.show(context,
+                        title: 'Failed',
+                        message: res.data.message,
+                        contentType: ContentType.failure);
+                  }
+                }
               },
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 6.0.h),

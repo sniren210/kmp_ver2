@@ -2,46 +2,67 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class LoggingInterceptor extends InterceptorsWrapper {
-  int maxCharactersPerLine = 200;
-
   @override
-  Future onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
-    debugPrint("--> ${options.method} ${options.path}");
-    debugPrint("Headers: ${options.headers.toString()}");
-    debugPrint("<-- END HTTP");
+  Future onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
+    logPrint('*** API Request - Start ***');
 
-    return super.onRequest(options, handler);
+    printKV('URI', options.uri);
+    printKV('METHOD', options.method);
+    logPrint('HEADERS:');
+    options.headers.forEach((key, v) => printKV(' - $key', v));
+    logPrint('BODY:');
+    printAll(options.data ?? '');
+
+    logPrint('*** API Request - End ***');
+
+    return handler.next(options);
   }
 
   @override
-  Future onResponse(Response response, ResponseInterceptorHandler handler) async {
-    debugPrint(
-        "<-- ${response.statusCode} ${response.requestOptions.method} ${response.requestOptions.path}");
+  void onError(DioError err, ErrorInterceptorHandler handler) {
+    logPrint('*** Api Error - Start ***:');
 
-    String responseAsString = response.data.toString();
-
-    if (responseAsString.length > maxCharactersPerLine) {
-      int iterations = (responseAsString.length / maxCharactersPerLine).floor();
-      for (int i = 0; i <= iterations; i++) {
-        int endingIndex = i * maxCharactersPerLine + maxCharactersPerLine;
-        if (endingIndex > responseAsString.length) {
-          endingIndex = responseAsString.length;
-        }
-        debugPrint(
-            responseAsString.substring(i * maxCharactersPerLine, endingIndex).toString());
-      }
-    } else {
-      debugPrint(response.data.toString());
+    logPrint('URI: ${err.requestOptions.uri}');
+    if (err.response != null) {
+      logPrint('STATUS CODE: ${err.response?.statusCode?.toString()}');
+    }
+    logPrint('$err');
+    if (err.response != null) {
+      printKV('REDIRECT', err.response?.realUri ?? '');
+      logPrint('BODY:');
+      printAll(err.response?.data.toString());
     }
 
-    debugPrint("<-- END HTTP");
-
-    return super.onResponse(response, handler);
+    logPrint('*** Api Error - End ***:');
+    return handler.next(err);
   }
 
   @override
-  Future onError(DioError err, ErrorInterceptorHandler handler) async {
-    debugPrint("ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}");
-    return super.onError(err, handler);
+  Future onResponse(
+      Response response, ResponseInterceptorHandler handler) async {
+    logPrint('*** Api Response - Start ***');
+
+    printKV('URI', response.requestOptions.uri);
+    printKV('STATUS CODE', response.statusCode ?? '');
+    printKV('REDIRECT', response.isRedirect ?? false);
+    logPrint('BODY:');
+    printAll(response.data ?? '');
+
+    logPrint('*** Api Response - End ***');
+
+    return handler.next(response);
+  }
+
+  void printKV(String key, Object v) {
+    logPrint('$key: $v');
+  }
+
+  void printAll(msg) {
+    msg.toString().split('\n').forEach(logPrint);
+  }
+
+  void logPrint(String s) {
+    debugPrint(s);
   }
 }

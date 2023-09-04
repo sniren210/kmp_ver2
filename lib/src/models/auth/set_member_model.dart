@@ -9,20 +9,55 @@ SetMemberModel setMemberModelFromJson(String str) => SetMemberModel.fromJson(jso
 String setMemberModelToJson(SetMemberModel data) => json.encode(data.toJson());
 
 class SetMemberModel {
-    SetMemberResponse response;
+    int status;
+    bool success;
+    SetMemberData data;
 
     SetMemberModel({
-        required this.response,
+        required this.status,
+        required this.success,
+        required this.data,
     });
 
     SetMemberModel copyWith({
-        SetMemberResponse? response,
+        int? status,
+        bool? success,
+        SetMemberData? data,
     }) => 
         SetMemberModel(
-            response: response ?? this.response,
+            status: status ?? this.status,
+            success: success ?? this.success,
+            data: data ?? this.data,
         );
 
     factory SetMemberModel.fromJson(Map<String, dynamic> json) => SetMemberModel(
+        status: json["status"],
+        success: json["success"],
+        data: SetMemberData.fromJson(json["data"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "status": status,
+        "success": success,
+        "data": data.toJson(),
+    };
+}
+
+class SetMemberData {
+    SetMemberResponse response;
+
+    SetMemberData({
+        required this.response,
+    });
+
+    SetMemberData copyWith({
+        SetMemberResponse? response,
+    }) => 
+        SetMemberData(
+            response: response ?? this.response,
+        );
+
+    factory SetMemberData.fromJson(Map<String, dynamic> json) => SetMemberData(
         response: SetMemberResponse.fromJson(json["response"]),
     );
 

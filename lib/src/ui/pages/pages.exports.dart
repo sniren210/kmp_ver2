@@ -10,3 +10,4 @@ export 'onboarding/onboarding.exports.dart';
 export 'pages.exports.dart';
 export 'register/register.exports.dart';
 export 'splash/splash.exports.dart';
+export 'widgets/widgets.exports.dart';

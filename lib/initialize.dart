@@ -25,7 +25,10 @@ class InitializeApp {
     // Provider register
     sl.registerLazySingleton(() => ThemeModeSettingProvider(sharedPreferences: sl<SharedPreferences>() ));
     sl.registerLazySingleton(() => LocaleSettingProvider(sharedPreferences: sl<SharedPreferences>() ));   
-    sl.registerLazySingleton(() => SplashProvider());   
+    sl.registerLazySingleton(() => SplashProvider());
+
+    sl.registerLazySingleton(() => RegisterProvider());   
+    sl.registerLazySingleton(() => LoginProvider());   
   }
 
   static List<SingleChildWidget> initProvider() {
@@ -33,6 +36,8 @@ class InitializeApp {
       ChangeNotifierProvider(create: (context) => sl<ThemeModeSettingProvider>()),
       ChangeNotifierProvider(create: (context) => sl<LocaleSettingProvider>()),
       ChangeNotifierProvider(create: (context) => sl<SplashProvider>()),
+      ChangeNotifierProvider(create: (context) => sl<RegisterProvider>()),
+      ChangeNotifierProvider(create: (context) => sl<LoginProvider>()),
 
     ];
   }

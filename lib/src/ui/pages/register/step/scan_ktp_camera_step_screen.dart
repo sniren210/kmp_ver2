@@ -22,6 +22,8 @@ class _ScanKTPCameraStepScreenState extends State<ScanKTPCameraStepScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final repo = context.watch<RegisterProvider>();
+
     return Scaffold(
       body: FutureBuilder<List<CameraDescription>>(
         future: availableCameras(),
@@ -35,84 +37,93 @@ class _ScanKTPCameraStepScreenState extends State<ScanKTPCameraStepScreen> {
                     style: TextStyle(color: Colors.black),
                   ));
             }
-            return CameraOverlayTogo(
-                camera: snapshot.data![0],
-                model: CardOverlay.byFormat(OverlayFormat.cardID3),
-                onCapture: (XFile file, CameraController controller) {
-                  showDialog(
-                    context: context,
-                    barrierColor: Colors.black,
-                    builder: (context) {
-                      CardOverlay overlay =
-                          CardOverlay.byFormat(OverlayFormat.cardID3);
-                      return StatefulBuilder(builder: (context, _satset) {
-                        return AlertDialog(
-                            actionsAlignment: MainAxisAlignment.center,
-                            backgroundColor: Colors.black,
-                            title: const Text('Capture',
-                                style: TextStyle(color: Colors.white),
-                                textAlign: TextAlign.center),
-                            actions: [
-                              OutlinedButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      isLoading = false;
-                                    });
+            return OverlayLoadingWidget(
+              loading: repo.isLoading,
+              child: CameraOverlayTogo(
+                  camera: snapshot.data![0],
+                  model: CardOverlay.byFormat(OverlayFormat.cardID3),
+                  onCapture: (XFile file, CameraController controller) {
+                    showDialog(
+                      context: context,
+                      barrierColor: Colors.black,
+                      builder: (context) {
+                        CardOverlay overlay =
+                            CardOverlay.byFormat(OverlayFormat.cardID3);
+                        return StatefulBuilder(builder: (context, _satset) {
+                          return AlertDialog(
+                              actionsAlignment: MainAxisAlignment.center,
+                              backgroundColor: Colors.black,
+                              title: const Text('Capture',
+                                  style: TextStyle(color: Colors.white),
+                                  textAlign: TextAlign.center),
+                              actions: [
+                                OutlinedButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        isLoading = false;
+                                      });
 
-                                    Navigator.of(context).pop(false);
-                                  },
-                                  child: const Icon(Icons.close)),
-                              isLoading
-                                  ? OutlinedButton(
-                                      onPressed: () {},
-                                      child: const SizedBox(
-                                          width: 14,
-                                          height: 14,
-                                          child: CircularProgressIndicator(
-                                              strokeWidth: 2.0)))
-                                  : OutlinedButton(
-                                      onPressed: () async {
-                                        controller.pausePreview();
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ConfirmationKTPStepScreen(),
-                                            ));
+                                      Navigator.of(context).pop(false);
+                                    },
+                                    child: const Icon(Icons.close)),
+                                isLoading
+                                    ? OutlinedButton(
+                                        onPressed: () {},
+                                        child: const SizedBox(
+                                            width: 14,
+                                            height: 14,
+                                            child: CircularProgressIndicator(
+                                                strokeWidth: 2.0)))
+                                    : OutlinedButton(
+                                        onPressed: () async {
+                                          _satset(() {
+                                            isLoading = true;
+                                          });
+                                          controller.pausePreview();
 
-                                        _satset(() {
-                                          isLoading = true;
-                                        });
+                                          final res = await repo.uploadKtp(
+                                              image: File(file.path));
 
-                                        _satset(() {
-                                          isLoading = false;
-                                        });
-                                      },
-                                      child: const Icon(Icons.check)),
-                            ],
-                            content: SizedBox(
-                                width: double.infinity,
-                                child: AspectRatio(
-                                  aspectRatio: overlay.ratio ?? 0,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      alignment: FractionalOffset.center,
-                                      image: FileImage(
-                                        File(file.path),
-                                        scale: 1.5,
-                                      ),
-                                    )),
-                                  ),
-                                )));
-                      });
-                    },
-                  );
-                },
-                info:
-                    'Posisikan Kartu KTP Anda berada di dalam kotak dan pastikan agar gambar tidak blur',
-                label: 'Scanning Foto KTP');
+                                          if (res.success) {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ConfirmationKTPStepScreen(data: res.data),
+                                                ));
+                                          }
+                                          
+
+                                          _satset(() {
+                                            isLoading = false;
+                                          });
+                                        },
+                                        child: const Icon(Icons.check)),
+                              ],
+                              content: SizedBox(
+                                  width: double.infinity,
+                                  child: AspectRatio(
+                                    aspectRatio: overlay.ratio ?? 0,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        alignment: FractionalOffset.center,
+                                        image: FileImage(
+                                          File(file.path),
+                                          scale: 1.5,
+                                        ),
+                                      )),
+                                    ),
+                                  )));
+                        });
+                      },
+                    );
+                  },
+                  info:
+                      'Posisikan Kartu KTP Anda berada di dalam kotak dan pastikan agar gambar tidak blur',
+                  label: 'Scanning Foto KTP'),
+            );
           } else {
             return const Align(
                 alignment: Alignment.center,

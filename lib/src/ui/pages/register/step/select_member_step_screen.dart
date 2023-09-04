@@ -11,13 +11,17 @@ class SelectMemberStepScreen extends StatefulWidget {
 class _SelectMemberStepScreenState extends State<SelectMemberStepScreen> {
   @override
   Widget build(BuildContext context) {
+    final repo = context.watch<RegisterProvider>();
+
     return Scaffold(
       body: ListView.builder(
           itemCount: 5,
           itemBuilder: (context, index) {
             return Card(
                 child: InkWell(
-              onTap: () {},
+              onTap: () {
+                print(repo.registerRequest.toJson());
+              },
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 14, vertical: 20),

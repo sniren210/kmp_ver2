@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kmp_ver2/kmp_ver2.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -36,12 +37,25 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Future<void> initializeInSplash() async {
+    final SharedPreferences sharedPreferences = sl<SharedPreferences>();
+
+    final userToken =
+        sharedPreferences.getString(AppConstants.prefsConstrants.token);
+
     await Future.delayed(const Duration(seconds: 2));
 
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => OnboardingScreen(),
-        ));
+    if (userToken?.isNotEmpty ?? false) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomeScreen(),
+          ));
+    } else {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OnboardingScreen(),
+          ));
+    }
   }
 }

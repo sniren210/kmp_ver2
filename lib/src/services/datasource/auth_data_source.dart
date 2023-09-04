@@ -13,7 +13,7 @@ class AuthDataSource {
         data: request.toJson());
 
     if (response.statusCode == 201) {
-      return ApiCallResponse<AuthModel>.fromJson(response.data).response;
+      return AuthModel.fromJson(response.data);
     }
 
     throw Exception();
@@ -30,7 +30,7 @@ class AuthDataSource {
     );
 
     if (response.statusCode == 200) {
-      return ApiCallResponse<AuthModel>.fromJson(response.data).response;
+      return AuthModel.fromJson(response.data);
     }
 
     throw Exception();
@@ -43,7 +43,7 @@ class AuthDataSource {
     );
 
     if (response.statusCode == 200) {
-      return ApiCallResponse<GetOtpModel>.fromJson(response.data).response;
+      return GetOtpModel.fromJson(response.data);
     }
 
     throw Exception();
@@ -60,7 +60,7 @@ class AuthDataSource {
     );
 
     if (response.statusCode == 200) {
-      return ApiCallResponse<GetOtpModel>.fromJson(response.data).response;
+      return GetOtpModel.fromJson(response.data);
     }
 
     throw Exception();
@@ -78,7 +78,7 @@ class AuthDataSource {
     );
 
     if (response.statusCode == 200) {
-      return ApiCallResponse<CheckKtpModel>.fromJson(response.data).response;
+      return CheckKtpModel.fromJson(response.data);
     }
 
     throw Exception();
@@ -91,7 +91,7 @@ class AuthDataSource {
     );
 
     if (response.statusCode == 200) {
-      return ApiCallResponse<SetMemberModel>.fromJson(response.data).response;
+      return SetMemberModel.fromJson(response.data);
     }
 
     throw Exception();

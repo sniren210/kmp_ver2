@@ -3,5 +3,5 @@
 // run :
 // genexp
 
-export 'register_request.dart';
-export 'request.exports.dart';
+export 'register_provider.dart';
+export 'register_provider.exports.dart';

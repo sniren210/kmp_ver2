@@ -4,6 +4,5 @@
 // genexp
 
 export 'auth/auth.exports.dart';
-export 'core/core.exports.dart';
 export 'models.exports.dart';
 export 'request/request.exports.dart';
