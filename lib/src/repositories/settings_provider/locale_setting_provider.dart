@@ -12,13 +12,13 @@ class LocaleSettingProvider with ChangeNotifier {
   });
 
   String get value =>
-      sharedPreferences.getString(AppConstants.localeSetting) ?? defaultValue ?? 'en';
+      sharedPreferences.getString(AppConstants.prefsConstrants.localeSetting) ?? defaultValue ?? 'en';
 
   Future<void> setValue(String? value) async {
     if (value == null) {
-      await sharedPreferences.remove(AppConstants.localeSetting);
+      await sharedPreferences.remove(AppConstants.prefsConstrants.localeSetting);
     } else {
-      await sharedPreferences.setString(AppConstants.localeSetting, value);
+      await sharedPreferences.setString(AppConstants.prefsConstrants.localeSetting, value);
     }
 
     notifyListeners();

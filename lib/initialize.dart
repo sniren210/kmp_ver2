@@ -18,6 +18,9 @@ class InitializeApp {
 
     sl.registerLazySingleton(() => NetworkInfo(sl<Connectivity>()));
     sl.registerLazySingleton(() => DioClient(AppConstants.baseUrl, sl<Dio>(), loggingInterceptor: sl<LoggingInterceptor>(), sharedPreferences: sl<SharedPreferences>()));
+    
+    
+    sl.registerLazySingleton(() => AuthDataSource(dioClient: sl<DioClient>()));
 
     // Provider register
     sl.registerLazySingleton(() => ThemeModeSettingProvider(sharedPreferences: sl<SharedPreferences>() ));

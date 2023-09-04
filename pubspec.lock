@@ -485,6 +485,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  model_factory:
+    dependency: "direct main"
+    description:
+      name: model_factory
+      sha256: "6a376f4db6cc8196885375eabaacb8c731af60d1a4f2d4c110a423c10bd6ca98"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.1"
   nested:
     dependency: transitive
     description:

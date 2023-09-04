@@ -3,6 +3,4 @@
 // run :
 // genexp
 
-export 'datasource/datasource.exports.dart';
-export 'dio/dio.exports.dart';
-export 'services.exports.dart';
+export 'register_request.dart';

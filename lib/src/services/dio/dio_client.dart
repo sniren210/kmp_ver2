@@ -19,7 +19,8 @@ class DioClient {
     required this.loggingInterceptor,
     required this.sharedPreferences,
   }) {
-    token = sharedPreferences.getString(AppConstants.token) ?? '';
+    token =
+        sharedPreferences.getString(AppConstants.prefsConstrants.token) ?? '';
     dio
       ..options.baseUrl = baseUrl
       ..options.connectTimeout = 30000
@@ -27,6 +28,7 @@ class DioClient {
       ..httpClientAdapter
       ..options.headers = {
         'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json',
         'Authorization': 'Bearer $token',
       };
 

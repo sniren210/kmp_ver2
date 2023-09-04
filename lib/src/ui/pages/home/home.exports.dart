@@ -3,4 +3,5 @@
 // run :
 // genexp
 
+export 'home.exports.dart';
 export 'home_screen.dart';
