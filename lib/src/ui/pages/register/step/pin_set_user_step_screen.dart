@@ -22,7 +22,7 @@ class _PinSetUserStepScreenState extends State<PinSetUserStepScreen> {
                 height: context.dimensions.marginSizeLarge,
               ),
               Image.asset(
-                ImageConstant.logo,
+                AppConstants.imageConstant.logo,
                 width: 150.w,
               ),
               SizedBox(

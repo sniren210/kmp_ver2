@@ -11,6 +11,13 @@ extension SizedContext on BuildContext {
 }
 
 class Dimensions{
+   double get fontSizeExtraSmall => 10.0;
+   double get fontSizeSmall => 12.0;
+   double get fontSizeDefault => 14.0;
+   double get fontSizeLarge => 16.0;
+   double get fontSizeExtraLarge => 18.0;
+   double get fontSizeOverLarge => 24.0;
+   double get fontSizeWallet => 24.0;
 
   double get paddingSizeExtraExtraSmall => 2.0.h;
   double get paddingSizeExtraSmall => 5.0.h;

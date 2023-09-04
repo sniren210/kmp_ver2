@@ -18,18 +18,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       'title': 'Daftar sekarang!',
       'desc':
           'Kemana kamu pergi hari ini? kami akan siap berkendara dimana saja dan kapan saja',
-      'image': ImageConstant.slider1
+      'image': AppConstants.imageConstant.slider1
     },
     {
       'title': 'Dapat dilacak',
       'desc': 'Lacak lokasi dan driver paket Anda, secara real-time.',
-      'image': ImageConstant.slider2
+      'image': AppConstants.imageConstant.slider2
     },
     {
       'title': 'Pengiriman cepat',
       'desc':
           'Anda dapat tetap produktif saat kami mengambil dan mengantar paket Anda, semuanya dalam hitungan jam!',
-      'image': ImageConstant.slider3
+      'image': AppConstants.imageConstant.slider3
     },
   ];
 

@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen>
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Image.asset(ImageConstant.logoWithName,
+                Image.asset(AppConstants.imageConstant.logoWithName,
                     height: 250.0, fit: BoxFit.scaleDown, width: 250.0),
               ],
             ),

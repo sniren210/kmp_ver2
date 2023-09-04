@@ -52,7 +52,7 @@ class _OtpCodeStepScreenState extends State<OtpCodeStepScreen> {
           Column(
             children: [
               Image.asset(
-                ImageConstant.logo,
+                AppConstants.imageConstant.logo,
                 width: 150.w,
               ),
               SizedBox(

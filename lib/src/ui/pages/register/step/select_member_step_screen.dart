@@ -40,7 +40,7 @@ class _SelectMemberStepScreenState extends State<SelectMemberStepScreen> {
                         horizontal: 14, vertical: 20),
                     child: Row(
                       children: [
-                        Image.asset(ImageConstant.logo, height: 60, width: 60),
+                        Image.asset(AppConstants.imageConstant.logo, height: 60, width: 60),
                         SizedBox(
                           width: 20,
                         ),

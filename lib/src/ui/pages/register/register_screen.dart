@@ -55,7 +55,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                         Image.asset(
-                          ImageConstant.logo,
+                          AppConstants.imageConstant.logo,
                           height: 100.h,
                         ),
                       ],
@@ -83,6 +83,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 FilledButton(
                   onPressed: () async {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PaymentMemberScreen(),
+                            ));
                   
                     if (_formKey.currentState?.validate() ?? false) {
                       final res = await repo.setPhoneNumber(

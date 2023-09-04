@@ -12,6 +12,8 @@ class AppConstants {
 
   static ApiConstant apiConstant = ApiConstant();
 
+  static ImageConstant imageConstant = ImageConstant();
+
   static final navigatorKey = GlobalKey<NavigatorState>();
 }
 
@@ -32,4 +34,13 @@ class ApiConstant {
 
   String onboarding = '/intro';
   String memberList = '/customer/member_type';
+}
+
+class ImageConstant{
+   String logoWithName = 'assets/images/app/logo_with_name.png';
+   String logo = 'assets/images/app/logo.png';
+   String bank = 'assets/images/app/bank.png';
+   String slider1 = 'assets/images/slider/slide_one.png';
+   String slider2 = 'assets/images/slider/slide_two.png';
+   String slider3 = 'assets/images/slider/slide_three.png';
 }
